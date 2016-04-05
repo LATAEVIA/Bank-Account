@@ -30,23 +30,16 @@ $(document).ready(function(){
   });
   $('form#deposit-withdrawl').submit(function(event){
     event.preventDefault();
-    var inputDeposit = $("input#deposit-field").val();
-    console.log(inputDeposit);
+    newPerson.deposit;
     var inputWithdrawl = $("input#withdrawl-field").val();
     console.log(inputWithdrawl);
-    if (inputDeposit ){
 
-    }
 
 
     var balance = inputDeposit;
     console.log(balance);
 
 
-    var newPerson = new BankAccount(inputName, inputDeposit, balance);
-    console.log(newPerson);
-    $("input#account-name").val("");
-    $("input#initial-deposit").val("");
-    $('form#sign-up').hide();
+
   });
 });
