@@ -4,42 +4,43 @@ this.initialDeposit = initialDeposit;
 this.balance = balance;
 }
 
-BankAccount.prototype.withdrawl= function(){
-this.balance -= withdrawl;
+BankAccount.prototype.withdrawl= function(withdrawlAmount){
+return this.balance -= withdrawlAmount;
 }
 
-BankAccount.prototype.deposit = function(){
-this.balance += deposit;
+BankAccount.prototype.deposit = function(depositAmount){
+return this.balance += depositAmount;
 }
-
 
 $(document).ready(function(){
   $('form#sign-up').submit(function(event){
     event.preventDefault();
     var inputName = $("input#account-name").val();
-    console.log(inputName);
     var inputInitDeposit = $("input#initial-deposit").val();
-    console.log(inputInitDeposit);
-    var balance = inputInitDeposit;
-    console.log(balance);
+    var balance = parseInt(inputInitDeposit);
     var newPerson = new BankAccount(inputName, inputInitDeposit, balance);
-    console.log(newPerson);
-    $("input#account-name").val("");
-    $("input#initial-deposit").val("");
-    $('form#sign-up').hide();
-  });
-  $('form#deposit-withdrawl').submit(function(event){
-    event.preventDefault();
-    newPerson.deposit;
-    var inputWithdrawl = $("input#withdrawl-field").val();
-    console.log(inputWithdrawl);
+    // $("input#account-name").val("");
+    // $("input#initial-deposit").val("");
+    $('#hide-sign-up').hide();
+    $('#show-transaction-form').show();
+    $("#new-person-initial-deposit").text(inputInitDeposit);
 
+    $('form#deposit-withdrawl').submit(function(event){
+      event.preventDefault();
+      var withdrawlAmount = parseInt($("input#withdrawl-field").val());
+      var depositAmount = parseInt($("input#deposit-field").val());
 
+      if (withdrawlAmount > 0 && depositAmount > 0) {
+        $("#current-balance").text(newPerson.deposit(depositAmount));
+        $("#current-balance").text(newPerson.withdrawl(withdrawlAmount));
+      } else if (depositAmount > 0) {
+        $("#current-balance").text(newPerson.deposit(depositAmount));
+      } else if (withdrawlAmount > 0) {
+        $("#current-balance").text(newPerson.withdrawl(withdrawlAmount));
+      }
 
-    var balance = inputDeposit;
-    console.log(balance);
-
-
-
+      $("input#withdrawl-field").val("");
+      $("input#deposit-field").val("");
+    });
   });
 });
